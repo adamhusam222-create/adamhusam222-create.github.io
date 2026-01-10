@@ -1,191 +1,252 @@
-gymtech/
-├─ app/
-│  ├─ layout.tsx
-│  ├─ page.tsx
-│  ├─ globals.css
-│
-├─ components/
-│  ├─ header.tsx
-│  ├─ muscle-category.tsx
-│  ├─ exercise-card.tsx
-│
-├─ data/
-│  ├─ exercises.ts
-│
-├─ tailwind.config.ts
-├─ postcss.config.js
-└─ package.json
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GymTech - Exercise Technique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-/* Purple & Black Theme */
-:root {
-  --background: #0b0b0f;
-  --foreground: #f5f5f5;
-  --card: #14141a;
-  --border: #3b0764;
-  --primary: #a855f7;
-  --secondary: #1f1f2b;
-  --muted: #9ca3af;
-}
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --card: #15151d;
+      --purple: #a855f7;
+      --text: #f5f5f5;
+      --muted: #9ca3af;
+      --border: #2e1065;
+    }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
-import "./globals.css"
-import type { Metadata } from "next"
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-export const metadata: Metadata = {
-  title: "GymTech - Exercise Techniques",
-  description: "Learn proper exercise techniques with video guides",
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
-    </html>
-  )
-}
-import Header from "@/components/header"
-import MuscleCategory from "@/components/muscle-category"
-import { exerciseData } from "@/data/exercises"
+    header {
+      text-align: center;
+      padding: 30px;
+      border-bottom: 1px solid var(--border);
+    }
 
-export default function Home() {
-  return (
-    <main className="min-h-screen">
-      <Header />
+    header h1 {
+      font-size: 40px;
+    }
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-center mb-10">
-          Choose a Muscle Group
-        </h2>
+    header span {
+      color: var(--purple);
+    }
 
-        <div className="space-y-8">
-          {exerciseData.map((category) => (
-            <MuscleCategory key={category.name} category={category} />
-          ))}
-        </div>
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 15px;
+    }
+
+    .muscle {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .muscle-header {
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      background: #111118;
+    }
+
+    .muscle-header:hover {
+      background: #1b1b26;
+    }
+
+    .muscle-header h2 {
+      font-size: 22px;
+    }
+
+    .exercise-list {
+      display: none;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .exercise {
+      background: #1a1a24;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .exercise button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 18px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .exercise button:hover {
+      color: var(--purple);
+    }
+
+    .details {
+      display: none;
+      margin-top: 15px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      color: var(--purple);
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    ul {
+      margin-left: 18px;
+      margin-top: 5px;
+    }
+
+    li {
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .mistake {
+      color: #f87171;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1><span>Gym</span>Tech</h1>
+  <p>Learn the correct way to perform exercises</p>
+</header>
+
+<div class="container">
+
+<!-- ================= CHEST ================= -->
+<div class="muscle">
+  <div class="muscle-header" onclick="toggleSection(this)">
+    <h2>💪 Chest</h2>
+    <span>+</span>
+  </div>
+  <div class="exercise-list">
+
+    <div class="exercise">
+      <button onclick="toggleExercise(this)">Dumbbell Press</button>
+      <div class="details">
+        <iframe src="https://www.youtube.com/embed/VmB1G1K7v94"></iframe>
+        <p><b>Primary:</b> Chest | <b>Secondary:</b> Triceps, Shoulders</p>
+
+        <p class="section-title">Technique</p>
+        <ul>
+          <li>Feet flat on floor</li>
+          <li>Lower dumbbells slowly</li>
+          <li>Press without locking elbows</li>
+        </ul>
+
+        <p class="section-title">Common Mistakes</p>
+        <ul>
+          <li class="mistake">Using too much weight</li>
+          <li class="mistake">Bouncing dumbbells</li>
+          <li class="mistake">Elbows flaring out</li>
+        </ul>
       </div>
+    </div>
 
-      <footer className="text-center py-6 text-gray-400 border-t border-purple-900 mt-12">
-        Built to learn correct exercise technique
-      </footer>
-    </main>
-  )
-}
-export default function Header() {
-  return (
-    <header className="bg-[var(--card)] border-b border-purple-900">
-      <div className="max-w-6xl mx-auto py-6 text-center">
-        <h1 className="text-4xl font-bold">
-          <span className="text-purple-500">Gym</span>Tech
-        </h1>
-        <p className="text-gray-400 mt-2">
-          Master proper exercise technique
-        </p>
+    <div class="exercise">
+      <button onclick="toggleExercise(this)">Incline Press</button>
+      <div class="details">
+        <iframe src="https://www.youtube.com/embed/8iPEnn-ltC8"></iframe>
+        <p><b>Primary:</b> Upper Chest | <b>Secondary:</b> Shoulders</p>
+
+        <p class="section-title">Technique</p>
+        <ul>
+          <li>Bench at 30–45 degrees</li>
+          <li>Control the descent</li>
+        </ul>
+
+        <p class="section-title">Common Mistakes</p>
+        <ul>
+          <li class="mistake">Bench too steep</li>
+          <li class="mistake">Lifting hips</li>
+        </ul>
       </div>
-    </header>
-  )
-}
-"use client"
-
-import { useState } from "react"
-import ExerciseCard from "./exercise-card"
-import type { MuscleGroup } from "@/data/exercises"
-
-export default function MuscleCategory({
-  category,
-}: {
-  category: MuscleGroup
-}) {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <div className="bg-[var(--card)] rounded-lg border border-purple-900">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full px-6 py-4 flex justify-between items-center hover:bg-[var(--secondary)]"
-      >
-        <div className="flex items-center gap-3">
-          <span className="text-3xl">{category.icon}</span>
-          <h3 className="text-2xl font-bold">{category.name}</h3>
-        </div>
-        <span className="text-purple-500 text-2xl">
-          {open ? "−" : "+"}
-        </span>
-      </button>
-
-      {open && (
-        <div className="p-6 grid gap-6 md:grid-cols-2">
-          {category.exercises.map((exercise) => (
-            <ExerciseCard key={exercise.name} exercise={exercise} />
-          ))}
-        </div>
-      )}
     </div>
-  )
-}
-"use client"
 
-import { useState } from "react"
-import type { Exercise } from "@/data/exercises"
+    <div class="exercise">
+      <button onclick="toggleExercise(this)">Cable Flyes</button>
+      <div class="details">
+        <iframe src="https://www.youtube.com/embed/Iwe6AmxVf7o"></iframe>
+        <p><b>Primary:</b> Chest</p>
 
-export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
-  const [show, setShow] = useState(false)
+        <p class="section-title">Technique</p>
+        <ul>
+          <li>Slight bend in elbows</li>
+          <li>Squeeze chest at center</li>
+        </ul>
 
-  return (
-    <div className="bg-[var(--secondary)] rounded-lg border border-purple-900">
-      <button
-        onClick={() => setShow(!show)}
-        className="w-full px-4 py-3 flex justify-between hover:bg-black"
-      >
-        <h4 className="font-semibold">{exercise.name}</h4>
-        <span className="text-purple-500">{show ? "Hide" : "Show"}</span>
-      </button>
-
-      {show && (
-        <div className="p-4 space-y-4">
-          <iframe
-            src={exercise.videoUrl}
-            className="w-full aspect-video rounded"
-            allowFullScreen
-          />
-
-          <p>
-            <span className="text-purple-400 font-semibold">Primary:</span>{" "}
-            {exercise.primaryMuscle}
-          </p>
-
-          <div>
-            <h5 className="text-purple-400 font-semibold">Technique</h5>
-            <ul className="list-disc list-inside text-sm">
-              {exercise.technique.map((t, i) => (
-                <li key={i}>{t}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h5 className="text-red-400 font-semibold">Common Mistakes</h5>
-            <ul className="list-disc list-inside text-sm text-gray-400">
-              {exercise.mistakes.map((m, i) => (
-                <li key={i}>{m}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
+        <p class="section-title">Common Mistakes</p>
+        <ul>
+          <li class="mistake">Too heavy weight</li>
+          <li class="mistake">Turning it into a press</li>
+        </ul>
+      </div>
     </div>
-  )
-}
-data/exercises.ts
-npm install
-npm run dev
-http://localhost:3000
+
+  </div>
+</div>
+
+<!-- ADD MORE MUSCLE GROUPS EXACT SAME WAY -->
+<p style="color:#9ca3af; text-align:center;">
+More muscle groups can be added easily using the same structure.
+</p>
+
+</div>
+
+<footer>
+  Built for learning correct exercise technique 💜
+</footer>
+
+<script>
+  function toggleSection(el) {
+    const content = el.nextElementSibling;
+    content.style.display = content.style.display === "block" ? "none" : "block";
+    el.querySelector("span").textContent = content.style.display === "block" ? "−" : "+";
+  }
+
+  function toggleExercise(btn) {
+    const details = btn.nextElementSibling;
+    details.style.display = details.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>
