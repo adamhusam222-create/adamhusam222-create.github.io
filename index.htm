@@ -707,3 +707,839 @@
                                 <li><span class="check-icon">✓</span> Lie on bench, grip bar shoulder-width or narrower</li>
                                 <li><span class="check-icon">✓</span> Keep elbows tucked close to body</li>
                                 <li><span class="check-icon">
+                                    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymTech - Exercise Techniques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a0033 0%, #000 100%);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #8b5cf6;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: #c4b5fd;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .muscle-group {
+            background: #1a1a1a;
+            border: 2px solid #8b5cf6;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .muscle-header {
+            background: linear-gradient(135deg, #6b21a8 0%, #8b5cf6 100%);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .muscle-header:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+        }
+
+        .muscle-header h2 {
+            font-size: 2rem;
+        }
+
+        .toggle-icon {
+            font-size: 2rem;
+        }
+
+        .exercises-container {
+            display: none;
+            padding: 2rem;
+            background: #0a0a0a;
+        }
+
+        .exercises-container.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .exercise-card {
+            background: #1a1a1a;
+            border: 1px solid #3d3d3d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+        }
+
+        .exercise-header {
+            background: #2a2a2a;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-header h3 {
+            color: #8b5cf6;
+            font-size: 1.3rem;
+        }
+
+        .exercise-toggle {
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+
+        .exercise-content {
+            display: none;
+            padding: 1rem;
+        }
+
+        .exercise-content.active {
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .muscle-info {
+            background: #2a2a2a;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .muscle-info p {
+            margin: 0.5rem 0;
+        }
+
+        .primary {
+            color: #8b5cf6;
+            font-weight: bold;
+        }
+
+        .secondary {
+            color: #c4b5fd;
+            font-weight: bold;
+        }
+
+        .technique-section h4 {
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+        }
+
+        .technique-section ul,
+        .mistakes-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .technique-section li {
+            padding: 0.5rem 0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .check-icon {
+            color: #10b981;
+        }
+
+        .mistakes-section {
+            background: #1a0a0a;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #ef4444;
+            margin-top: 1rem;
+        }
+
+        .mistakes-section h4 {
+            color: #ef4444;
+            margin-bottom: 0.5rem;
+        }
+
+        .mistakes-section li {
+            padding: 0.4rem 0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .cross-icon {
+            color: #ef4444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0a0a0a;
+            border-top: 2px solid #8b5cf6;
+            margin-top: 3rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .muscle-header h2 { font-size: 1.5rem; }
+            .exercises-container.active { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>💪 GymTech</h1>
+        <p class="tagline">Master Proper Exercise Techniques</p>
+    </header>
+
+    <div class="container" id="exerciseData"></div>
+
+    <footer>
+        <p>Built for learning proper exercise techniques</p>
+    </footer>
+
+    <script>
+        const exercises = {
+            "Chest": {
+                icon: "💪",
+                exercises: [
+                    {
+                        name: "Dumbbell Press",
+                        video: "VmB1G1K7v94",
+                        primary: "Chest",
+                        secondary: "Triceps, Shoulders",
+                        technique: [
+                            "Lie flat on bench with feet on the floor",
+                            "Hold dumbbells at chest level, palms facing forward",
+                            "Press up until arms are extended but not locked",
+                            "Lower slowly with control to chest level"
+                        ],
+                        mistakes: [
+                            "Flaring elbows too wide (keep 45° angle)",
+                            "Bouncing weights off chest",
+                            "Arching back excessively"
+                        ]
+                    },
+                    {
+                        name: "Incline Press",
+                        video: "8iPEnn-ltC8",
+                        primary: "Upper Chest",
+                        secondary: "Shoulders, Triceps",
+                        technique: [
+                            "Set bench to 30-45 degree angle",
+                            "Keep shoulders back and down",
+                            "Press dumbbells up in a slight arc",
+                            "Lower to upper chest area"
+                        ],
+                        mistakes: [
+                            "Setting bench angle too high (becomes shoulder press)",
+                            "Lifting hips off the bench",
+                            "Using momentum instead of muscle control"
+                        ]
+                    },
+                    {
+                        name: "Cable Flyes",
+                        video: "Iwe6AmxVf7o",
+                        primary: "Chest",
+                        secondary: "Shoulders",
+                        technique: [
+                            "Stand in center of cable machine",
+                            "Keep slight bend in elbows throughout",
+                            "Bring hands together in front of chest",
+                            "Squeeze chest at the peak contraction"
+                        ],
+                        mistakes: [
+                            "Bending elbows too much (turns into a press)",
+                            "Using too much weight",
+                            "Leaning too far forward"
+                        ]
+                    }
+                ]
+            },
+            "Back": {
+                icon: "🔙",
+                exercises: [
+                    {
+                        name: "Pull Ups",
+                        video: "eGo4IYlbE5g",
+                        primary: "Lats",
+                        secondary: "Biceps, Rear Delts",
+                        technique: [
+                            "Grip bar slightly wider than shoulder width",
+                            "Hang with arms fully extended",
+                            "Pull up until chin is over the bar",
+                            "Lower with control, full extension at bottom"
+                        ],
+                        mistakes: [
+                            "Using momentum (kipping)",
+                            "Not going to full extension at bottom",
+                            "Shrugging shoulders up"
+                        ]
+                    },
+                    {
+                        name: "Lat Pulldown",
+                        video: "CAwf7n6Luuc",
+                        primary: "Lats",
+                        secondary: "Biceps, Rear Delts",
+                        technique: [
+                            "Sit with thighs secured under pads",
+                            "Grip bar wider than shoulder width",
+                            "Pull bar down to upper chest",
+                            "Squeeze shoulder blades together at bottom"
+                        ],
+                        mistakes: [
+                            "Pulling bar behind neck",
+                            "Leaning back too far",
+                            "Using arms instead of back"
+                        ]
+                    },
+                    {
+                        name: "Face Pulls",
+                        video: "rep-qVOkqgk",
+                        primary: "Rear Delts",
+                        secondary: "Traps, Rhomboids",
+                        technique: [
+                            "Set cable at face height",
+                            "Pull rope towards face, separating hands",
+                            "Keep elbows high throughout movement",
+                            "Squeeze shoulder blades at the end"
+                        ],
+                        mistakes: [
+                            "Using too much weight",
+                            "Dropping elbows low",
+                            "Not externally rotating at the end"
+                        ]
+                    },
+                    {
+                        name: "Deadlifts",
+                        video: "op9kVnSso6Q",
+                        primary: "Lower Back, Glutes",
+                        secondary: "Hamstrings, Traps, Forearms",
+                        technique: [
+                            "Stand with feet hip-width apart",
+                            "Grip bar just outside legs",
+                            "Keep back straight, chest up",
+                            "Drive through heels, extend hips and knees together"
+                        ],
+                        mistakes: [
+                            "Rounding the lower back",
+                            "Letting bar drift away from body",
+                            "Hyperextending at the top"
+                        ]
+                    }
+                ]
+            },
+            "Biceps": {
+                icon: "💪",
+                exercises: [
+                    {
+                        name: "Barbell Curls",
+                        video: "kwG2ipFRgfo",
+                        primary: "Biceps",
+                        secondary: "Forearms",
+                        technique: [
+                            "Stand with feet shoulder-width apart",
+                            "Grip barbell with underhand grip",
+                            "Keep elbows close to sides",
+                            "Curl bar up to shoulder level, squeeze biceps"
+                        ],
+                        mistakes: [
+                            "Swinging body for momentum",
+                            "Moving elbows forward",
+                            "Not fully extending at bottom"
+                        ]
+                    },
+                    {
+                        name: "Dumbbell Curls",
+                        video: "ykJmrZ5v0Oo",
+                        primary: "Biceps",
+                        secondary: "Forearms",
+                        technique: [
+                            "Stand or sit with dumbbells at sides",
+                            "Curl one or both dumbbells up",
+                            "Supinate wrist (turn palm up) as you curl",
+                            "Lower with control"
+                        ],
+                        mistakes: [
+                            "Using too much weight",
+                            "Fast and uncontrolled reps",
+                            "Swinging the weights"
+                        ]
+                    },
+                    {
+                        name: "Hammer Curls",
+                        video: "zC3nLlEvin4",
+                        primary: "Brachialis",
+                        secondary: "Biceps, Forearms",
+                        technique: [
+                            "Hold dumbbells with neutral grip (palms facing each other)",
+                            "Keep elbows pinned to sides",
+                            "Curl up while maintaining neutral grip",
+                            "Lower slowly with control"
+                        ],
+                        mistakes: [
+                            "Rotating wrists during movement",
+                            "Swinging weights up",
+                            "Not controlling the negative"
+                        ]
+                    },
+                    {
+                        name: "Cable Curls",
+                        video: "NFzTWp2qpiE",
+                        primary: "Biceps",
+                        secondary: "Forearms",
+                        technique: [
+                            "Stand facing low cable pulley",
+                            "Grip bar or rope attachment",
+                            "Keep elbows at sides, curl up",
+                            "Squeeze at top, lower with control"
+                        ],
+                        mistakes: [
+                            "Standing too close to machine",
+                            "Letting elbows drift forward",
+                            "Using body momentum"
+                        ]
+                    }
+                ]
+            },
+            "Triceps": {
+                icon: "💪",
+                exercises: [
+                    {
+                        name: "Close Grip Bench Press",
+                        video: "nEF0bv2FW94",
+                        primary: "Triceps",
+                        secondary: "Chest, Shoulders",
+                        technique: [
+                            "Lie on bench, grip bar shoulder-width or narrower",
+                            "Keep elbows tucked close to body",
+                            "Lower bar to lower chest",
+                            "Press up by extending elbows"
+                        ],
+                        mistakes: [
+                            "Grip too narrow (strains wrists)",
+                            "Flaring elbows out",
+                            "Bouncing bar off chest"
+                        ]
+                    },
+                    {
+                        name: "Triceps Dips",
+                        video: "6kALZikXxLc",
+                        primary: "Triceps",
+                        secondary: "Chest, Shoulders",
+                        technique: [
+                            "Grip parallel bars, arms straight",
+                            "Keep body upright for triceps focus",
+                            "Lower until elbows are at 90 degrees",
+                            "Push up until arms are fully extended"
+                        ],
+                        mistakes: [
+                            "Going too deep (shoulder strain)",
+                            "Leaning too far forward",
+                            "Not locking out at top"
+                        ]
+                    },
+                    {
+                        name: "Triceps Pushdown",
+                        video: "2-LAMcpzODU",
+                        primary: "Triceps",
+                        secondary: "",
+                        technique: [
+                            "Stand facing cable machine",
+                            "Grip bar or rope at chest height",
+                            "Keep elbows pinned to sides",
+                            "Push down until arms are straight, squeeze"
+                        ],
+                        mistakes: [
+                            "Letting elbows drift forward",
+                            "Using shoulders to push",
+                            "Leaning over the weight"
+                        ]
+                    },
+                    {
+                        name: "Skull Crushers",
+                        video: "d_KZxkY_0cM",
+                        primary: "Triceps",
+                        secondary: "",
+                        technique: [
+                            "Lie on bench holding bar above chest",
+                            "Keep upper arms vertical",
+                            "Bend elbows to lower bar to forehead",
+                            "Extend elbows to return to start"
+                        ],
+                        mistakes: [
+                            "Moving elbows back and forth",
+                            "Going too heavy too soon",
+                            "Lowering bar to wrong position"
+                        ]
+                    }
+                ]
+            },
+            "Forearms": {
+                icon: "✊",
+                exercises: [
+                    {
+                        name: "Barbell Wrist Curls",
+                        video: "7AC4VP9C_Mw",
+                        primary: "Forearm Flexors",
+                        secondary: "",
+                        technique: [
+                            "Sit with forearms resting on thighs",
+                            "Hold barbell with underhand grip",
+                            "Let wrists extend down",
+                            "Curl wrists up, squeezing forearms"
+                        ],
+                        mistakes: [
+                            "Lifting forearms off thighs",
+                            "Using too much weight",
+                            "Jerky movements"
+                        ]
+                    },
+                    {
+                        name: "Reverse Wrist Curls",
+                        video: "A9-ATxNHU60",
+                        primary: "Forearm Extensors",
+                        secondary: "",
+                        technique: [
+                            "Sit with forearms on thighs, palms down",
+                            "Let wrists hang over edge",
+                            "Curl wrists upward",
+                            "Lower with control"
+                        ],
+                        mistakes: [
+                            "Going too heavy",
+                            "Moving forearms",
+                            "Rushing the reps"
+                        ]
+                    },
+                    {
+                        name: "Cable Wrist Curls",
+                        video: "kVk4Qu0UXIY",
+                        primary: "Forearm Flexors",
+                        secondary: "",
+                        technique: [
+                            "Kneel facing low cable",
+                            "Rest forearms on bench",
+                            "Curl wrists toward you",
+                            "Lower slowly with control"
+                        ],
+                        mistakes: [
+                            "Using momentum",
+                            "Lifting forearms",
+                            "Not full range of motion"
+                        ]
+                    }
+                ]
+            },
+            "Legs": {
+                icon: "🦵",
+                exercises: [
+                    {
+                        name: "Barbell Back Squats",
+                        video: "bEv6CCg2BC8",
+                        primary: "Quadriceps, Glutes",
+                        secondary: "Hamstrings, Core",
+                        technique: [
+                            "Bar rests on upper traps",
+                            "Feet shoulder-width, toes slightly out",
+                            "Sit back and down, keeping chest up",
+                            "Go to parallel or below, drive through heels"
+                        ],
+                        mistakes: [
+                            "Knees caving inward",
+                            "Rounding lower back",
+                            "Rising on toes"
+                        ]
+                    },
+                    {
+                        name: "Leg Press",
+                        video: "IZxyjW7MPJQ",
+                        primary: "Quadriceps",
+                        secondary: "Glutes, Hamstrings",
+                        technique: [
+                            "Sit with back flat against pad",
+                            "Place feet shoulder-width on platform",
+                            "Lower weight until knees are at 90 degrees",
+                            "Push through heels to extend legs"
+                        ],
+                        mistakes: [
+                            "Locking knees at top",
+                            "Lifting hips off seat",
+                            "Going too deep"
+                        ]
+                    },
+                    {
+                        name: "Leg Curls",
+                        video: "1Tq3QdYUuHs",
+                        primary: "Hamstrings",
+                        secondary: "",
+                        technique: [
+                            "Lie face down on machine",
+                            "Pad should be above heels",
+                            "Curl legs up toward glutes",
+                            "Lower with control"
+                        ],
+                        mistakes: [
+                            "Lifting hips off pad",
+                            "Using momentum",
+                            "Not full range of motion"
+                        ]
+                    },
+                    {
+                        name: "Leg Extensions",
+                        video: "YyvSfVjQeL0",
+                        primary: "Quadriceps",
+                        secondary: "",
+                        technique: [
+                            "Sit with back against pad",
+                            "Pad should be on lower shins",
+                            "Extend legs until straight",
+                            "Squeeze quads at top, lower slowly"
+                        ],
+                        mistakes: [
+                            "Using too much weight",
+                            "Jerky movements",
+                            "Not controlling the negative"
+                        ]
+                    },
+                    {
+                        name: "Romanian Deadlifts",
+                        video: "jEy_czb3RKA",
+                        primary: "Hamstrings",
+                        secondary: "Glutes, Lower Back",
+                        technique: [
+                            "Hold barbell at hip level",
+                            "Push hips back while lowering bar",
+                            "Keep bar close to legs",
+                            "Feel stretch in hamstrings, then drive hips forward"
+                        ],
+                        mistakes: [
+                            "Rounding the back",
+                            "Bending knees too much",
+                            "Not hinging at hips"
+                        ]
+                    },
+                    {
+                        name: "Calf Raises",
+                        video: "-M4-G8p8fmc",
+                        primary: "Calves",
+                        secondary: "",
+                        technique: [
+                            "Stand on edge of step or platform",
+                            "Let heels drop below platform level",
+                            "Push up onto toes as high as possible",
+                            "Pause at top, lower slowly"
+                        ],
+                        mistakes: [
+                            "Bouncing at bottom",
+                            "Not full range of motion",
+                            "Going too fast"
+                        ]
+                    }
+                ]
+            },
+            "Stomach": {
+                icon: "🎯",
+                exercises: [
+                    {
+                        name: "Crunches",
+                        video: "Xyd_fa5zoEU",
+                        primary: "Rectus Abdominis (Upper Abs)",
+                        secondary: "",
+                        technique: [
+                            "Lie on back with knees bent",
+                            "Hands behind head (don't pull on neck)",
+                            "Lift shoulders off ground using abs",
+                            "Lower with control, don't rest completely"
+                        ],
+                        mistakes: [
+                            "Pulling on neck with hands",
+                            "Using momentum",
+                            "Coming up too high"
+                        ]
+                    },
+                    {
+                        name: "Leg Raises",
+                        video: "l4kQd9eWclE",
+                        primary: "Lower Abs",
+                        secondary: "Hip Flexors",
+                        technique: [
+                            "Lie flat or hang from bar",
+                            "Keep legs straight or slightly bent",
+                            "Raise legs until perpendicular to floor",
+                            "Lower slowly with control"
+                        ],
+                        mistakes: [
+                            "Swinging legs",
+                            "Arching lower back",
+                            "Using momentum"
+                        ]
+                    },
+                    {
+                        name: "Plank",
+                        video: "ASdvN_XEl_c",
+                        primary: "Core (All)",
+                        secondary: "Shoulders, Back",
+                        technique: [
+                            "Forearms on ground, elbows under shoulders",
+                            "Body in straight line from head to heels",
+                            "Engage core, squeeze glutes",
+                            "Hold position, breathe steadily"
+                        ],
+                        mistakes: [
+                            "Hips sagging down",
+                            "Hips raised too high",
+                            "Holding breath"
+                        ]
+                    },
+                    {
+                        name: "Cable Crunches",
+                        video: "AV5PmSJfl9I",
+                        primary: "Rectus Abdominis",
+                        secondary: "",
+                        technique: [
+                            "Kneel facing cable machine",
+                            "Hold rope behind head",
+                            "Crunch down, bringing elbows toward thighs",
+                            "Return with control, maintain tension"
+                        ],
+                        mistakes: [
+                            "Sitting back instead of crunching",
+                            "Using arms to pull",
+                            "Not controlling the weight"
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function createExerciseHTML(exercise) {
+            const secondaryHTML = exercise.secondary ? 
+                `<p><span class="secondary">Secondary:</span> ${exercise.secondary}</p>` : '';
+            
+            const techniqueHTML = exercise.technique.map(t => 
+                `<li><span class="check-icon">✓</span> ${t}</li>`
+            ).join('');
+            
+            const mistakesHTML = exercise.mistakes.map(m => 
+                `<li><span class="cross-icon">✗</span> ${m}</li>`
+            ).join('');
+
+            return `
+                <div class="exercise-card">
+                    <div class="exercise-header" onclick="toggleExercise(this)">
+                        <h3>${exercise.name}</h3>
+                        <span class="exercise-toggle">Show</span>
+                    </div>
+                    <div class="exercise-content">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/${exercise.video}" allowfullscreen></iframe>
+                        </div>
+                        <div class="muscle-info">
+                            <p><span class="primary">Primary:</span> ${exercise.primary}</p>
+                            ${secondaryHTML}
+                        </div>
+                        <div class="technique-section">
+                            <h4>Technique Points:</h4>
+                            <ul>${techniqueHTML}</ul>
+                        </div>
+                        <div class="mistakes-section">
+                            <h4>Common Mistakes:</h4>
+                            <ul>${mistakesHTML}</ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateHTML() {
+            const container = document.getElementById('exerciseData');
+            let html = '';
+
+            for (const [muscleName, muscleData] of Object.entries(exercises)) {
+                const exercisesHTML = muscleData.exercises.map(ex => createExerciseHTML(ex)).join('');
+                
+                html += `
+                    <div class="muscle-group">
+                        <div class="muscle-header" onclick="toggleMuscleGroup(this)">
+                            <h2>${muscleData.icon} ${muscleName}</h2>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="exercises-container">
+                            ${exercisesHTML}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function toggleMuscleGroup(element) {
+            const container = element.nextElementSibling;
+            const icon = element.querySelector('.toggle-icon');
+            
+            container.classList.toggle('active');
+            icon.textContent = container.classList.contains('active') ? '−' : '+';
+        }
+
+        function toggleExercise(element) {
+            const content = element.nextElementSibling;
+            const toggle = element.querySelector('.exercise-toggle');
+            
+            content.classList.toggle('active');
+            toggle.textContent = content.classList.contains('active') ? 'Hide' : 'Show';
+        }
+
+        generateHTML();
+    </script>
+</body>
+</html>
