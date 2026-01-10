@@ -1,173 +1,55 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+gymtech/
+├─ app/
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  ├─ globals.css
+│
+├─ components/
+│  ├─ header.tsx
+│  ├─ muscle-category.tsx
+│  ├─ exercise-card.tsx
+│
+├─ data/
+│  ├─ exercises.ts
+│
+├─ tailwind.config.ts
+├─ postcss.config.js
+└─ package.json
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
-
-/* Purple and black gym theme - always dark mode */
+/* Purple & Black Theme */
 :root {
-  --background: oklch(0.1 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.65 0.25 300);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.2 300);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.3 0.05 300);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.65 0.25 300);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.65 0.25 300);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.2 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.3 0.05 300);
-  --sidebar-ring: oklch(0.65 0.25 300);
+  --background: #0b0b0f;
+  --foreground: #f5f5f5;
+  --card: #14141a;
+  --border: #3b0764;
+  --primary: #a855f7;
+  --secondary: #1f1f2b;
+  --muted: #9ca3af;
 }
 
-/* Dark mode uses same purple/black theme */
-.dark {
-  --background: oklch(0.1 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.65 0.25 300);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.55 0.2 300);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.3 0.05 300);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.65 0.25 300);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.65 0.25 300);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.2 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.3 0.05 300);
-  --sidebar-ring: oklch(0.65 0.25 300);
+body {
+  background-color: var(--background);
+  color: var(--foreground);
 }
-
-@theme inline {
-  --font-sans: "Geist", "Geist Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "GymTech - Exercise Techniques",
-  description: "Learn proper exercise techniques with video guides and tips",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
+  description: "Learn proper exercise techniques with video guides",
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }
@@ -177,117 +59,37 @@ import { exerciseData } from "@/data/exercises"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <Header />
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-center mb-8 text-foreground">Choose a Muscle Group</h2>
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Choose a Muscle Group
+        </h2>
 
-        {/* All muscle categories */}
-        <div className="space-y-12">
+        <div className="space-y-8">
           {exerciseData.map((category) => (
             <MuscleCategory key={category.name} category={category} />
           ))}
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="text-center py-8 text-muted-foreground border-t border-border mt-12">
-        <p>Built for learning proper exercise techniques</p>
+      <footer className="text-center py-6 text-gray-400 border-t border-purple-900 mt-12">
+        Built to learn correct exercise technique
       </footer>
     </main>
   )
 }
-"use client"
-
-import { useState } from "react"
-import type { Exercise } from "@/data/exercises"
-
-interface ExerciseCardProps {
-  exercise: Exercise
-}
-
-export default function ExerciseCard({ exercise }: ExerciseCardProps) {
-  const [showDetails, setShowDetails] = useState(false)
-
-  return (
-    <div className="bg-secondary rounded-lg border border-border overflow-hidden">
-      {/* Exercise Name */}
-      <button
-        onClick={() => setShowDetails(!showDetails)}
-        className="w-full px-4 py-3 flex items-center justify-between hover:bg-muted transition-colors"
-      >
-        <h4 className="text-lg font-semibold text-foreground">{exercise.name}</h4>
-        <span className="text-primary">{showDetails ? "Hide" : "Show"}</span>
-      </button>
-
-      {/* Exercise Details */}
-      {showDetails && (
-        <div className="p-4 space-y-4">
-          {/* Video Embed */}
-          <div className="aspect-video bg-background rounded-lg overflow-hidden">
-            <iframe
-              src={exercise.videoUrl}
-              title={exercise.name}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-
-          {/* Muscles Worked */}
-          <div className="bg-background p-3 rounded-lg">
-            <p className="text-sm">
-              <span className="text-primary font-semibold">Primary: </span>
-              <span className="text-foreground">{exercise.primaryMuscle}</span>
-            </p>
-            {exercise.secondaryMuscles && (
-              <p className="text-sm mt-1">
-                <span className="text-accent font-semibold">Secondary: </span>
-                <span className="text-muted-foreground">{exercise.secondaryMuscles}</span>
-              </p>
-            )}
-          </div>
-
-          {/* Technique Points */}
-          <div>
-            <h5 className="font-semibold text-primary mb-2">Technique Points:</h5>
-            <ul className="space-y-1">
-              {exercise.technique.map((point, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-foreground">
-                  <span className="text-green-500">✓</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Common Mistakes */}
-          <div>
-            <h5 className="font-semibold text-red-400 mb-2">Common Mistakes:</h5>
-            <ul className="space-y-1">
-              {exercise.mistakes.map((mistake, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <span className="text-red-500">✗</span>
-                  {mistake}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
 export default function Header() {
   return (
-    <header className="bg-card border-b border-border">
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        <h1 className="text-4xl font-bold text-center">
-          <span className="text-primary">Gym</span>
-          <span className="text-foreground">Tech</span>
+    <header className="bg-[var(--card)] border-b border-purple-900">
+      <div className="max-w-6xl mx-auto py-6 text-center">
+        <h1 className="text-4xl font-bold">
+          <span className="text-purple-500">Gym</span>Tech
         </h1>
-        <p className="text-center text-muted-foreground mt-2">Master proper exercise techniques</p>
+        <p className="text-gray-400 mt-2">
+          Master proper exercise technique
+        </p>
       </div>
     </header>
   )
@@ -298,30 +100,30 @@ import { useState } from "react"
 import ExerciseCard from "./exercise-card"
 import type { MuscleGroup } from "@/data/exercises"
 
-interface MuscleCategoryProps {
+export default function MuscleCategory({
+  category,
+}: {
   category: MuscleGroup
-}
-
-export default function MuscleCategory({ category }: MuscleCategoryProps) {
-  const [isOpen, setIsOpen] = useState(false)
+}) {
+  const [open, setOpen] = useState(false)
 
   return (
-    <div className="bg-card rounded-lg border border-border overflow-hidden">
-      {/* Category Header - Click to expand */}
+    <div className="bg-[var(--card)] rounded-lg border border-purple-900">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary transition-colors"
+        onClick={() => setOpen(!open)}
+        className="w-full px-6 py-4 flex justify-between items-center hover:bg-[var(--secondary)]"
       >
         <div className="flex items-center gap-3">
           <span className="text-3xl">{category.icon}</span>
-          <h3 className="text-2xl font-bold text-foreground">{category.name}</h3>
+          <h3 className="text-2xl font-bold">{category.name}</h3>
         </div>
-        <span className="text-primary text-2xl">{isOpen ? "−" : "+"}</span>
+        <span className="text-purple-500 text-2xl">
+          {open ? "−" : "+"}
+        </span>
       </button>
 
-      {/* Exercises List - Shows when expanded */}
-      {isOpen && (
-        <div className="p-6 pt-0 grid gap-6 md:grid-cols-2">
+      {open && (
+        <div className="p-6 grid gap-6 md:grid-cols-2">
           {category.exercises.map((exercise) => (
             <ExerciseCard key={exercise.name} exercise={exercise} />
           ))}
@@ -330,440 +132,60 @@ export default function MuscleCategory({ category }: MuscleCategoryProps) {
     </div>
   )
 }
-// This file contains all exercise data
-// You can easily add more exercises by following the same format
+"use client"
 
-export interface Exercise {
-  name: string
-  videoUrl: string // YouTube embed URL
-  primaryMuscle: string
-  secondaryMuscles?: string
-  technique: string[]
-  mistakes: string[]
+import { useState } from "react"
+import type { Exercise } from "@/data/exercises"
+
+export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
+  const [show, setShow] = useState(false)
+
+  return (
+    <div className="bg-[var(--secondary)] rounded-lg border border-purple-900">
+      <button
+        onClick={() => setShow(!show)}
+        className="w-full px-4 py-3 flex justify-between hover:bg-black"
+      >
+        <h4 className="font-semibold">{exercise.name}</h4>
+        <span className="text-purple-500">{show ? "Hide" : "Show"}</span>
+      </button>
+
+      {show && (
+        <div className="p-4 space-y-4">
+          <iframe
+            src={exercise.videoUrl}
+            className="w-full aspect-video rounded"
+            allowFullScreen
+          />
+
+          <p>
+            <span className="text-purple-400 font-semibold">Primary:</span>{" "}
+            {exercise.primaryMuscle}
+          </p>
+
+          <div>
+            <h5 className="text-purple-400 font-semibold">Technique</h5>
+            <ul className="list-disc list-inside text-sm">
+              {exercise.technique.map((t, i) => (
+                <li key={i}>{t}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="text-red-400 font-semibold">Common Mistakes</h5>
+            <ul className="list-disc list-inside text-sm text-gray-400">
+              {exercise.mistakes.map((m, i) => (
+                <li key={i}>{m}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
-
-export interface MuscleGroup {
-  name: string
-  icon: string
-  exercises: Exercise[]
-}
-
-export const exerciseData: MuscleGroup[] = [
-  // ============ CHEST ============
-  {
-    name: "Chest",
-    icon: "💪",
-    exercises: [
-      {
-        name: "Dumbbell Press",
-        videoUrl: "https://www.youtube.com/embed/VmB1G1K7v94",
-        primaryMuscle: "Chest",
-        secondaryMuscles: "Triceps, Shoulders",
-        technique: [
-          "Lie flat on bench with feet on the floor",
-          "Hold dumbbells at chest level, palms facing forward",
-          "Press up until arms are extended but not locked",
-          "Lower slowly with control to chest level",
-        ],
-        mistakes: [
-          "Flaring elbows too wide (keep 45° angle)",
-          "Bouncing weights off chest",
-          "Arching back excessively",
-        ],
-      },
-      {
-        name: "Incline Press",
-        videoUrl: "https://www.youtube.com/embed/8iPEnn-ltC8",
-        primaryMuscle: "Upper Chest",
-        secondaryMuscles: "Shoulders, Triceps",
-        technique: [
-          "Set bench to 30-45 degree angle",
-          "Keep shoulders back and down",
-          "Press dumbbells up in a slight arc",
-          "Lower to upper chest area",
-        ],
-        mistakes: [
-          "Setting bench angle too high (becomes shoulder press)",
-          "Lifting hips off the bench",
-          "Using momentum instead of muscle control",
-        ],
-      },
-      {
-        name: "Cable Flyes",
-        videoUrl: "https://www.youtube.com/embed/Iwe6AmxVf7o",
-        primaryMuscle: "Chest",
-        secondaryMuscles: "Shoulders",
-        technique: [
-          "Stand in center of cable machine",
-          "Keep slight bend in elbows throughout",
-          "Bring hands together in front of chest",
-          "Squeeze chest at the peak contraction",
-        ],
-        mistakes: ["Bending elbows too much (turns into a press)", "Using too much weight", "Leaning too far forward"],
-      },
-    ],
-  },
-
-  // ============ BACK ============
-  {
-    name: "Back",
-    icon: "🔙",
-    exercises: [
-      {
-        name: "Pull Ups",
-        videoUrl: "https://www.youtube.com/embed/eGo4IYlbE5g",
-        primaryMuscle: "Lats",
-        secondaryMuscles: "Biceps, Rear Delts",
-        technique: [
-          "Grip bar slightly wider than shoulder width",
-          "Hang with arms fully extended",
-          "Pull up until chin is over the bar",
-          "Lower with control, full extension at bottom",
-        ],
-        mistakes: ["Using momentum (kipping)", "Not going to full extension at bottom", "Shrugging shoulders up"],
-      },
-      {
-        name: "Lat Pulldown",
-        videoUrl: "https://www.youtube.com/embed/CAwf7n6Luuc",
-        primaryMuscle: "Lats",
-        secondaryMuscles: "Biceps, Rear Delts",
-        technique: [
-          "Sit with thighs secured under pads",
-          "Grip bar wider than shoulder width",
-          "Pull bar down to upper chest",
-          "Squeeze shoulder blades together at bottom",
-        ],
-        mistakes: ["Pulling bar behind neck", "Leaning back too far", "Using arms instead of back"],
-      },
-      {
-        name: "Face Pulls",
-        videoUrl: "https://www.youtube.com/embed/rep-qVOkqgk",
-        primaryMuscle: "Rear Delts",
-        secondaryMuscles: "Traps, Rhomboids",
-        technique: [
-          "Set cable at face height",
-          "Pull rope towards face, separating hands",
-          "Keep elbows high throughout movement",
-          "Squeeze shoulder blades at the end",
-        ],
-        mistakes: ["Using too much weight", "Dropping elbows low", "Not externally rotating at the end"],
-      },
-      {
-        name: "Deadlifts",
-        videoUrl: "https://www.youtube.com/embed/op9kVnSso6Q",
-        primaryMuscle: "Lower Back, Glutes",
-        secondaryMuscles: "Hamstrings, Traps, Forearms",
-        technique: [
-          "Stand with feet hip-width apart",
-          "Grip bar just outside legs",
-          "Keep back straight, chest up",
-          "Drive through heels, extend hips and knees together",
-        ],
-        mistakes: ["Rounding the lower back", "Letting bar drift away from body", "Hyperextending at the top"],
-      },
-    ],
-  },
-
-  // ============ BICEPS ============
-  {
-    name: "Biceps",
-    icon: "💪",
-    exercises: [
-      {
-        name: "Barbell Curls",
-        videoUrl: "https://www.youtube.com/embed/kwG2ipFRgfo",
-        primaryMuscle: "Biceps",
-        secondaryMuscles: "Forearms",
-        technique: [
-          "Stand with feet shoulder-width apart",
-          "Grip barbell with underhand grip",
-          "Keep elbows close to sides",
-          "Curl bar up to shoulder level, squeeze biceps",
-        ],
-        mistakes: ["Swinging body for momentum", "Moving elbows forward", "Not fully extending at bottom"],
-      },
-      {
-        name: "Dumbbell Curls",
-        videoUrl: "https://www.youtube.com/embed/ykJmrZ5v0Oo",
-        primaryMuscle: "Biceps",
-        secondaryMuscles: "Forearms",
-        technique: [
-          "Stand or sit with dumbbells at sides",
-          "Curl one or both dumbbells up",
-          "Supinate wrist (turn palm up) as you curl",
-          "Lower with control",
-        ],
-        mistakes: ["Using too much weight", "Fast and uncontrolled reps", "Swinging the weights"],
-      },
-      {
-        name: "Hammer Curls",
-        videoUrl: "https://www.youtube.com/embed/zC3nLlEvin4",
-        primaryMuscle: "Brachialis",
-        secondaryMuscles: "Biceps, Forearms",
-        technique: [
-          "Hold dumbbells with neutral grip (palms facing each other)",
-          "Keep elbows pinned to sides",
-          "Curl up while maintaining neutral grip",
-          "Lower slowly with control",
-        ],
-        mistakes: ["Rotating wrists during movement", "Swinging weights up", "Not controlling the negative"],
-      },
-      {
-        name: "Cable Curls",
-        videoUrl: "https://www.youtube.com/embed/NFzTWp2qpiE",
-        primaryMuscle: "Biceps",
-        secondaryMuscles: "Forearms",
-        technique: [
-          "Stand facing low cable pulley",
-          "Grip bar or rope attachment",
-          "Keep elbows at sides, curl up",
-          "Squeeze at top, lower with control",
-        ],
-        mistakes: ["Standing too close to machine", "Letting elbows drift forward", "Using body momentum"],
-      },
-    ],
-  },
-
-  // ============ TRICEPS ============
-  {
-    name: "Triceps",
-    icon: "💪",
-    exercises: [
-      {
-        name: "Close Grip Bench Press",
-        videoUrl: "https://www.youtube.com/embed/nEF0bv2FW94",
-        primaryMuscle: "Triceps",
-        secondaryMuscles: "Chest, Shoulders",
-        technique: [
-          "Lie on bench, grip bar shoulder-width or narrower",
-          "Keep elbows tucked close to body",
-          "Lower bar to lower chest",
-          "Press up by extending elbows",
-        ],
-        mistakes: ["Grip too narrow (strains wrists)", "Flaring elbows out", "Bouncing bar off chest"],
-      },
-      {
-        name: "Triceps Dips",
-        videoUrl: "https://www.youtube.com/embed/6kALZikXxLc",
-        primaryMuscle: "Triceps",
-        secondaryMuscles: "Chest, Shoulders",
-        technique: [
-          "Grip parallel bars, arms straight",
-          "Keep body upright for triceps focus",
-          "Lower until elbows are at 90 degrees",
-          "Push up until arms are fully extended",
-        ],
-        mistakes: ["Going too deep (shoulder strain)", "Leaning too far forward", "Not locking out at top"],
-      },
-      {
-        name: "Triceps Pushdown",
-        videoUrl: "https://www.youtube.com/embed/2-LAMcpzODU",
-        primaryMuscle: "Triceps",
-        technique: [
-          "Stand facing cable machine",
-          "Grip bar or rope at chest height",
-          "Keep elbows pinned to sides",
-          "Push down until arms are straight, squeeze",
-        ],
-        mistakes: ["Letting elbows drift forward", "Using shoulders to push", "Leaning over the weight"],
-      },
-      {
-        name: "Skull Crushers",
-        videoUrl: "https://www.youtube.com/embed/d_KZxkY_0cM",
-        primaryMuscle: "Triceps",
-        technique: [
-          "Lie on bench holding bar above chest",
-          "Keep upper arms vertical",
-          "Bend elbows to lower bar to forehead",
-          "Extend elbows to return to start",
-        ],
-        mistakes: ["Moving elbows back and forth", "Going too heavy too soon", "Lowering bar to wrong position"],
-      },
-    ],
-  },
-
-  // ============ FOREARMS ============
-  {
-    name: "Forearms",
-    icon: "✊",
-    exercises: [
-      {
-        name: "Barbell Wrist Curls",
-        videoUrl: "https://www.youtube.com/embed/7AC4VP9C_Mw",
-        primaryMuscle: "Forearm Flexors",
-        technique: [
-          "Sit with forearms resting on thighs",
-          "Hold barbell with underhand grip",
-          "Let wrists extend down",
-          "Curl wrists up, squeezing forearms",
-        ],
-        mistakes: ["Lifting forearms off thighs", "Using too much weight", "Jerky movements"],
-      },
-      {
-        name: "Reverse Wrist Curls",
-        videoUrl: "https://www.youtube.com/embed/A9-ATxNHU60",
-        primaryMuscle: "Forearm Extensors",
-        technique: [
-          "Sit with forearms on thighs, palms down",
-          "Let wrists hang over edge",
-          "Curl wrists upward",
-          "Lower with control",
-        ],
-        mistakes: ["Going too heavy", "Moving forearms", "Rushing the reps"],
-      },
-      {
-        name: "Cable Wrist Curls",
-        videoUrl: "https://www.youtube.com/embed/kVk4Qu0UXIY",
-        primaryMuscle: "Forearm Flexors",
-        technique: [
-          "Kneel facing low cable",
-          "Rest forearms on bench",
-          "Curl wrists toward you",
-          "Lower slowly with control",
-        ],
-        mistakes: ["Using momentum", "Lifting forearms", "Not full range of motion"],
-      },
-    ],
-  },
-
-  // ============ LEGS ============
-  {
-    name: "Legs",
-    icon: "🦵",
-    exercises: [
-      {
-        name: "Barbell Back Squats",
-        videoUrl: "https://www.youtube.com/embed/bEv6CCg2BC8",
-        primaryMuscle: "Quadriceps, Glutes",
-        secondaryMuscles: "Hamstrings, Core",
-        technique: [
-          "Bar rests on upper traps",
-          "Feet shoulder-width, toes slightly out",
-          "Sit back and down, keeping chest up",
-          "Go to parallel or below, drive through heels",
-        ],
-        mistakes: ["Knees caving inward", "Rounding lower back", "Rising on toes"],
-      },
-      {
-        name: "Leg Press",
-        videoUrl: "https://www.youtube.com/embed/IZxyjW7MPJQ",
-        primaryMuscle: "Quadriceps",
-        secondaryMuscles: "Glutes, Hamstrings",
-        technique: [
-          "Sit with back flat against pad",
-          "Place feet shoulder-width on platform",
-          "Lower weight until knees are at 90 degrees",
-          "Push through heels to extend legs",
-        ],
-        mistakes: ["Locking knees at top", "Lifting hips off seat", "Going too deep"],
-      },
-      {
-        name: "Leg Curls",
-        videoUrl: "https://www.youtube.com/embed/1Tq3QdYUuHs",
-        primaryMuscle: "Hamstrings",
-        technique: [
-          "Lie face down on machine",
-          "Pad should be above heels",
-          "Curl legs up toward glutes",
-          "Lower with control",
-        ],
-        mistakes: ["Lifting hips off pad", "Using momentum", "Not full range of motion"],
-      },
-      {
-        name: "Leg Extensions",
-        videoUrl: "https://www.youtube.com/embed/YyvSfVjQeL0",
-        primaryMuscle: "Quadriceps",
-        technique: [
-          "Sit with back against pad",
-          "Pad should be on lower shins",
-          "Extend legs until straight",
-          "Squeeze quads at top, lower slowly",
-        ],
-        mistakes: ["Using too much weight", "Jerky movements", "Not controlling the negative"],
-      },
-      {
-        name: "Romanian Deadlifts",
-        videoUrl: "https://www.youtube.com/embed/jEy_czb3RKA",
-        primaryMuscle: "Hamstrings",
-        secondaryMuscles: "Glutes, Lower Back",
-        technique: [
-          "Hold barbell at hip level",
-          "Push hips back while lowering bar",
-          "Keep bar close to legs",
-          "Feel stretch in hamstrings, then drive hips forward",
-        ],
-        mistakes: ["Rounding the back", "Bending knees too much", "Not hinging at hips"],
-      },
-      {
-        name: "Calf Raises",
-        videoUrl: "https://www.youtube.com/embed/-M4-G8p8fmc",
-        primaryMuscle: "Calves",
-        technique: [
-          "Stand on edge of step or platform",
-          "Let heels drop below platform level",
-          "Push up onto toes as high as possible",
-          "Pause at top, lower slowly",
-        ],
-        mistakes: ["Bouncing at bottom", "Not full range of motion", "Going too fast"],
-      },
-    ],
-  },
-
-  // ============ STOMACH / ABS ============
-  {
-    name: "Stomach",
-    icon: "🎯",
-    exercises: [
-      {
-        name: "Crunches",
-        videoUrl: "https://www.youtube.com/embed/Xyd_fa5zoEU",
-        primaryMuscle: "Rectus Abdominis (Upper Abs)",
-        technique: [
-          "Lie on back with knees bent",
-          "Hands behind head (don't pull on neck)",
-          "Lift shoulders off ground using abs",
-          "Lower with control, don't rest completely",
-        ],
-        mistakes: ["Pulling on neck with hands", "Using momentum", "Coming up too high"],
-      },
-      {
-        name: "Leg Raises",
-        videoUrl: "https://www.youtube.com/embed/l4kQd9eWclE",
-        primaryMuscle: "Lower Abs",
-        secondaryMuscles: "Hip Flexors",
-        technique: [
-          "Lie flat or hang from bar",
-          "Keep legs straight or slightly bent",
-          "Raise legs until perpendicular to floor",
-          "Lower slowly with control",
-        ],
-        mistakes: ["Swinging legs", "Arching lower back", "Using momentum"],
-      },
-      {
-        name: "Plank",
-        videoUrl: "https://www.youtube.com/embed/ASdvN_XEl_c",
-        primaryMuscle: "Core (All)",
-        secondaryMuscles: "Shoulders, Back",
-        technique: [
-          "Forearms on ground, elbows under shoulders",
-          "Body in straight line from head to heels",
-          "Engage core, squeeze glutes",
-          "Hold position, breathe steadily",
-        ],
-        mistakes: ["Hips sagging down", "Hips raised too high", "Holding breath"],
-      },
-      {
-        name: "Cable Crunches",
-        videoUrl: "https://www.youtube.com/embed/AV5PmSJfl9I",
-        primaryMuscle: "Rectus Abdominis",
-        technique: [
-          "Kneel facing cable machine",
-          "Hold rope behind head",
-          "Crunch down, bringing elbows toward thighs",
-          "Return with control, maintain tension",
-        ],
-        mistakes: ["Sitting back instead of crunching", "Using arms to pull", "Not controlling the weight"],
-      },
-    ],
-  },
-]
+data/exercises.ts
+npm install
+npm run dev
+http://localhost:3000
