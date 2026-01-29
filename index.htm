@@ -1,10 +1,12 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GymTech - Exercise Techniques</title>
+    <title>GymTech - Lär dig rätt tekniker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,359 +14,765 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #ff6b00;
+            --primary-dark: #cc5500;
+            --secondary: #00d4ff;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --bg-card: #151515;
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
+            --border: #2a2a2a;
+            --success: #00ff88;
+            --danger: #ff3366;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000;
-            color: #fff;
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        header {
-            background: linear-gradient(135deg, #1a0033 0%, #000 100%);
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 3px solid #8b5cf6;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #8b5cf6;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            color: #c4b5fd;
-            font-size: 1.2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .muscle-group {
-            background: #1a1a1a;
-            border: 2px solid #8b5cf6;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .muscle-header {
-            background: linear-gradient(135deg, #6b21a8 0%, #8b5cf6 100%);
-            padding: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .muscle-header:hover {
-            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
-        }
-
-        .muscle-header h2 {
-            font-size: 2rem;
-        }
-
-        .toggle-icon {
-            font-size: 2rem;
-        }
-
-        .exercises-container {
-            display: none;
-            padding: 2rem;
-            background: #0a0a0a;
-        }
-
-        .exercises-container.active {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .exercise-card {
-            background: #1a1a1a;
-            border: 1px solid #3d3d3d;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            border-color: #8b5cf6;
-        }
-
-        .exercise-header {
-            background: #2a2a2a;
-            padding: 1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .exercise-header h3 {
-            color: #8b5cf6;
-            font-size: 1.3rem;
-        }
-
-        .exercise-toggle {
-            color: #8b5cf6;
-            font-weight: bold;
-        }
-
-        .exercise-content {
-            display: none;
-            padding: 1rem;
-        }
-
-        .exercise-content.active {
-            display: block;
-        }
-
-        .video-container {
+        /* Hero Section */
+        .hero {
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, #1a0500 50%, var(--bg-darker) 100%);
             overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 1rem;
         }
 
-        .video-container iframe {
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            animation: heroGlow 20s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, 5%) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 12vw, 8rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(255, 107, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.4);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+
+        /* Value Props Grid */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+            width: 4px;
+            height: 0;
+            background: var(--primary);
+            transition: height 0.3s ease;
         }
 
-        .muscle-info {
-            background: #2a2a2a;
-            padding: 1rem;
-            border-radius: 8px;
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.2);
+        }
+
+        .value-card:hover::before {
+            height: 100%;
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .value-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .value-card p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover {
+            background: #1a1a1a;
+            transform: translateX(10px);
+        }
+
+        .features-list li::before {
+            content: '→';
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Target Audience */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1a1a1a 100%);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .audience-card:hover {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .audience-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .audience-card:hover .audience-icon {
+            filter: grayscale(0%);
+        }
+
+        .audience-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Exercise Preview */
+        .muscle-groups {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .muscle-tag {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .muscle-tag:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #1a0500 0%, var(--bg-darker) 50%, #001a1a 100%);
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 107, 0, 0.03) 2px, rgba(255, 107, 0, 0.03) 4px);
+        }
+
+        .cta-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        footer p {
             margin-bottom: 1rem;
         }
 
-        .muscle-info p {
-            margin: 0.5rem 0;
-        }
-
-        .primary {
-            color: #8b5cf6;
-            font-weight: bold;
-        }
-
-        .secondary {
-            color: #c4b5fd;
-            font-weight: bold;
-        }
-
-        .technique-section h4 {
-            color: #8b5cf6;
-            margin-bottom: 0.5rem;
-        }
-
-        .technique-section ul,
-        .mistakes-section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .technique-section li {
-            padding: 0.5rem 0;
+        .footer-links {
             display: flex;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
-        .check-icon {
-            color: #10b981;
+        .footer-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .mistakes-section {
-            background: #1a0a0a;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 3px solid #ef4444;
-            margin-top: 1rem;
+        .footer-links a:hover {
+            color: var(--primary);
         }
 
-        .mistakes-section h4 {
-            color: #ef4444;
-            margin-bottom: 0.5rem;
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .mistakes-section li {
-            padding: 0.4rem 0;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .cross-icon {
-            color: #ef4444;
-        }
-
-        footer {
+        .stat {
             text-align: center;
-            padding: 2rem;
-            background: #0a0a0a;
-            border-top: 2px solid #8b5cf6;
-            margin-top: 3rem;
-            color: #888;
         }
 
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .muscle-header h2 { font-size: 1.5rem; }
-            .exercises-container.active { grid-template-columns: 1fr; }
+            section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .value-grid,
+            .features-list,
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .muscle-groups {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>💪 GymTech</h1>
-        <p class="tagline">Master Proper Exercise Techniques</p>
-    </header>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>GYMTECH</h1>
+            <p class="hero-tagline">Träna smartare. Inte hårdare.</p>
+            <p class="hero-description">
+                Lär dig korrekt tekniker för gymövningar med vetenskapligt baserade instruktioner, 
+                videogenomgångar och biomekanikinformation. Undvik skador och maximera resultat.
+            </p>
+            <a href="#exercises" class="cta-button">Börja Lära</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </div>
 
-    <div class="container" id="exerciseData"></div>
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">Övningar</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Muskelgrupper</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Gratis</span>
+        </div>
+    </div>
 
+    <!-- What is GymTech -->
+    <section>
+        <h2 class="section-title">Vad är GymTech?</h2>
+        <p class="section-subtitle">En komplett lärplattform för rätt träningsteknik</p>
+        
+        <div class="value-grid">
+            <div class="value-card">
+                <span class="value-icon">🎯</span>
+                <h3>Korrekt Teknik</h3>
+                <p>Lär dig exakt hur varje övning ska utföras för att maximera resultat och minimera skaderisken. Varje övning har detaljerade instruktioner steg för steg.</p>
+            </div>
+            
+            <div class="value-card">
+                <span class="value-icon">📹</span>
+                <h3>Video-genomgångar</h3>
+                <p>Högkvalitativa instruktionsvideor visar tekniken i praktiken. Se exakt hur rörelserna ska se ut från start till slut.</p>
+            </div>
+            
+            <div class="value-card">
+                <span class="value-icon">⚠️</span>
+                <h3>Vanliga Misstag</h3>
+                <p>Lär dig vilka misstag du ska undvika. Vi förklarar de vanligaste felen och hur du korrigerar dem för säkrare träning.</p>
+            </div>
+            
+            <div class="value-card">
+                <span class="value-icon">💪</span>
+                <h3>Muskelaktivering</h3>
+                <p>Förstå vilka muskler som aktiveras i varje övning. Både primära och sekundära muskelgrupper förklaras tydligt.</p>
+            </div>
+            
+            <div class="value-card">
+                <span class="value-icon">🔬</span>
+                <h3>Biomekanik</h3>
+                <p>Lär dig hur kroppen rör sig och varför tekniken är viktig ur ett biomekaniiskt perspektiv för optimal prestation.</p>
+            </div>
+            
+            <div class="value-card">
+                <span class="value-icon">📚</span>
+                <h3>Komplett Guide</h3>
+                <p>Allt samlas på en plats. Från nybörjare till avancerad - hitta information för alla träningsnivåer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Will Learn -->
+    <section style="background: var(--bg-darker);">
+        <h2 class="section-title">Vad du lär dig</h2>
+        <p class="section-subtitle">Konkreta kunskaper som förbättrar din träning direkt</p>
+        
+        <ul class="features-list">
+            <li>Korrekt form för 30+ vanliga gymövningar uppdelade per muskelgrupp</li>
+            <li>Hur man undviker de vanligaste skadorna som orsakas av dålig teknik</li>
+            <li>Hur muskler aktiveras och fungerar under olika rörelser</li>
+            <li>Rätt andningsteknik och timing för varje övning</li>
+            <li>Skillnader mellan olika övningsvarianter och när man ska använda dem</li>
+            <li>Hur man progressivt ökar svårighetsgrad på ett säkert sätt</li>
+            <li>Biomekaniska principer för att förstå WHY tekniken är viktig</li>
+            <li>Tips för att självkorrigera din form utan personlig tränare</li>
+        </ul>
+    </section>
+
+    <!-- Target Audience -->
+    <section>
+        <h2 class="section-title">Vem är detta för?</h2>
+        <p class="section-subtitle">GymTech passar alla som vill träna säkert och effektivt</p>
+        
+        <div class="audience-grid">
+            <div class="audience-card">
+                <span class="audience-icon">🔰</span>
+                <h3>Nybörjare</h3>
+                <p>Starta din gymresa rätt från början. Lär dig grunderna innan du utvecklar dåliga vanor.</p>
+            </div>
+            
+            <div class="audience-card">
+                <span class="audience-icon">🏋️</span>
+                <h3>Gymbesökare</h3>
+                <p>Förfina din teknik och upptäck var du kan förbättra dina befintliga övningar.</p>
+            </div>
+            
+            <div class="audience-card">
+                <span class="audience-icon">🎓</span>
+                <h3>Självlärare</h3>
+                <p>Perfekt för dig som tränar själv och vill ha tillförlitlig guidning utan personlig tränare.</p>
+            </div>
+            
+            <div class="audience-card">
+                <span class="audience-icon">💼</span>
+                <h3>Yrkesverksamma</h3>
+                <p>Effektiv träning på begränsad tid - lär dig göra varje rep rätt för maximalt resultat.</p>
+            </div>
+            
+            <div class="audience-card">
+                <span class="audience-icon">🔄</span>
+                <h3>Återvändare</h3>
+                <p>Kommer tillbaka efter uppehåll? Fräscha upp din teknik innan du kör igång igen.</p>
+            </div>
+            
+            <div class="audience-card">
+                <span class="audience-icon">⚕️</span>
+                <h3>Skadeförebyggande</h3>
+                <p>Fokusera på långsiktig hälsa genom att lära dig rätt teknik från början.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercise Categories Preview -->
+    <section id="exercises" style="background: var(--bg-darker);">
+        <h2 class="section-title">Utforska Övningar</h2>
+        <p class="section-subtitle">Välj muskelgrupp för detaljerade övningsinstruktioner</p>
+        
+        <div class="muscle-groups">
+            <div class="muscle-tag">💪 Bröst</div>
+            <div class="muscle-tag">🔙 Rygg</div>
+            <div class="muscle-tag">💪 Biceps</div>
+            <div class="muscle-tag">💪 Triceps</div>
+            <div class="muscle-tag">✊ Underarmar</div>
+            <div class="muscle-tag">🦵 Ben</div>
+            <div class="muscle-tag">🎯 Mage</div>
+        </div>
+    </section>
+
+    <!-- Actual Exercise Database -->
+    <section style="background: var(--bg-card);">
+        <div class="container" id="exerciseData"></div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <h2>Redo att träna smartare?</h2>
+        <p style="font-size: 1.3rem; color: var(--text-dim); margin-bottom: 2rem;">
+            Börja lära dig rätt teknik idag - helt gratis
+        </p>
+        <a href="#exercises" class="cta-button">Se alla övningar</a>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>Built for learning proper exercise techniques</p>
+        <p>GymTech - En lärplattform för rätt träningsteknik</p>
+        <p style="font-size: 0.9rem; opacity: 0.6;">Byggd för att hjälpa dig träna säkert och effektivt</p>
+        <div class="footer-links">
+            <a href="#exercises">Övningar</a>
+            <a href="#exercises">Muskelgrupper</a>
+            <a href="#">Om</a>
+        </div>
     </footer>
 
     <script>
         const exercises = {
-            "Chest": {
+            "Bröst": {
                 icon: "💪",
                 exercises: [
                     {
                         name: "Dumbbell Press",
                         video: "VmB1G1K7v94",
-                        primary: "Chest",
-                        secondary: "Triceps, Shoulders",
+                        primary: "Bröst",
+                        secondary: "Triceps, Axlar",
                         technique: [
-                            "Lie flat on bench with feet on the floor",
-                            "Hold dumbbells at chest level, palms facing forward",
-                            "Press up until arms are extended but not locked",
-                            "Lower slowly with control to chest level"
+                            "Ligg plant på bänk med fötterna i golvet",
+                            "Håll hantlar vid brösthöjd, handflatorna framåt",
+                            "Pressa upp tills armarna är utsträckta men inte låsta",
+                            "Sänk långsamt med kontroll till brösthöjd"
                         ],
                         mistakes: [
-                            "Flaring elbows too wide (keep 45° angle)",
-                            "Bouncing weights off chest",
-                            "Arching back excessively"
+                            "Flaxa armbågarna för brett (håll 45° vinkel)",
+                            "Studsa vikterna från bröstet",
+                            "Överdriven ryggböjning"
                         ]
                     },
                     {
                         name: "Incline Press",
                         video: "8iPEnn-ltC8",
-                        primary: "Upper Chest",
-                        secondary: "Shoulders, Triceps",
+                        primary: "Övre Bröst",
+                        secondary: "Axlar, Triceps",
                         technique: [
-                            "Set bench to 30-45 degree angle",
-                            "Keep shoulders back and down",
-                            "Press dumbbells up in a slight arc",
-                            "Lower to upper chest area"
+                            "Ställ bänken på 30-45 graders vinkel",
+                            "Håll axlarna bak och ner",
+                            "Pressa hantlarna upp i en lätt båge",
+                            "Sänk till övre bröstområdet"
                         ],
                         mistakes: [
-                            "Setting bench angle too high (becomes shoulder press)",
-                            "Lifting hips off the bench",
-                            "Using momentum instead of muscle control"
+                            "För hög bänkvinkel (blir axelpress)",
+                            "Lyfta höfterna från bänken",
+                            "Använda momentum istället för muskelkontroll"
                         ]
                     },
                     {
                         name: "Cable Flyes",
                         video: "Iwe6AmxVf7o",
-                        primary: "Chest",
-                        secondary: "Shoulders",
+                        primary: "Bröst",
+                        secondary: "Axlar",
                         technique: [
-                            "Stand in center of cable machine",
-                            "Keep slight bend in elbows throughout",
-                            "Bring hands together in front of chest",
-                            "Squeeze chest at the peak contraction"
+                            "Stå i mitten av kabelmaskinen",
+                            "Håll lätt böjning i armbågarna genom hela rörelsen",
+                            "För händerna samman framför bröstet",
+                            "Knip ihop bröstet vid maximal kontraktion"
                         ],
                         mistakes: [
-                            "Bending elbows too much (turns into a press)",
-                            "Using too much weight",
-                            "Leaning too far forward"
+                            "Böja armbågarna för mycket (blir en press)",
+                            "Använda för mycket vikt",
+                            "Luta för långt framåt"
                         ]
                     }
                 ]
             },
-            "Back": {
+            "Rygg": {
                 icon: "🔙",
                 exercises: [
                     {
                         name: "Pull Ups",
                         video: "eGo4IYlbE5g",
-                        primary: "Lats",
-                        secondary: "Biceps, Rear Delts",
+                        primary: "Latissimus",
+                        secondary: "Biceps, Bakre Axlar",
                         technique: [
-                            "Grip bar slightly wider than shoulder width",
-                            "Hang with arms fully extended",
-                            "Pull up until chin is over the bar",
-                            "Lower with control, full extension at bottom"
+                            "Grepp stången något bredare än axelbredd",
+                            "Häng med fullt utsträckta armar",
+                            "Dra upp tills hakan är över stången",
+                            "Sänk med kontroll, full utsträckning i botten"
                         ],
                         mistakes: [
-                            "Using momentum (kipping)",
-                            "Not going to full extension at bottom",
-                            "Shrugging shoulders up"
+                            "Använda momentum (kipping)",
+                            "Inte gå till full utsträckning i botten",
+                            "Rycka upp axlarna"
                         ]
                     },
                     {
                         name: "Lat Pulldown",
                         video: "CAwf7n6Luuc",
-                        primary: "Lats",
-                        secondary: "Biceps, Rear Delts",
+                        primary: "Latissimus",
+                        secondary: "Biceps, Bakre Axlar",
                         technique: [
-                            "Sit with thighs secured under pads",
-                            "Grip bar wider than shoulder width",
-                            "Pull bar down to upper chest",
-                            "Squeeze shoulder blades together at bottom"
+                            "Sitt med låren säkrade under dynor",
+                            "Grepp stången bredare än axelbredd",
+                            "Dra stången ner till övre bröstet",
+                            "Knip ihop skulderbladen i botten"
                         ],
                         mistakes: [
-                            "Pulling bar behind neck",
-                            "Leaning back too far",
-                            "Using arms instead of back"
+                            "Dra stången bakom nacken",
+                            "Luta för långt bakåt",
+                            "Använda armarna istället för ryggen"
                         ]
                     },
                     {
                         name: "Face Pulls",
                         video: "rep-qVOkqgk",
-                        primary: "Rear Delts",
-                        secondary: "Traps, Rhomboids",
+                        primary: "Bakre Axlar",
+                        secondary: "Trapezius, Romboiderna",
                         technique: [
-                            "Set cable at face height",
-                            "Pull rope towards face, separating hands",
-                            "Keep elbows high throughout movement",
-                            "Squeeze shoulder blades at the end"
+                            "Ställ kabeln på ansiktshöjd",
+                            "Dra repet mot ansiktet, separera händerna",
+                            "Håll armbågarna höga genom hela rörelsen",
+                            "Knip ihop skulderbladen i slutet"
                         ],
                         mistakes: [
-                            "Using too much weight",
-                            "Dropping elbows low",
-                            "Not externally rotating at the end"
+                            "Använda för mycket vikt",
+                            "Släppa ner armbågarna",
+                            "Inte rotera externt i slutet"
                         ]
                     },
                     {
-                        name: "Deadlifts",
+                        name: "Marklyft",
                         video: "op9kVnSso6Q",
-                        primary: "Lower Back, Glutes",
-                        secondary: "Hamstrings, Traps, Forearms",
+                        primary: "Nedre Rygg, Gluteus",
+                        secondary: "Hamstrings, Trapezius, Underarmar",
                         technique: [
-                            "Stand with feet hip-width apart",
-                            "Grip bar just outside legs",
-                            "Keep back straight, chest up",
-                            "Drive through heels, extend hips and knees together"
+                            "Stå med fötterna höftbrett isär",
+                            "Grepp stången precis utanför benen",
+                            "Håll ryggen rak, bröstet upp",
+                            "Driv genom hälarna, sträck ut höfter och knän samtidigt"
                         ],
                         mistakes: [
-                            "Rounding the lower back",
-                            "Letting bar drift away from body",
-                            "Hyperextending at the top"
+                            "Runda nedre ryggen",
+                            "Låta stången glida bort från kroppen",
+                            "Överextension i toppen"
                         ]
                     }
                 ]
@@ -376,68 +784,68 @@
                         name: "Barbell Curls",
                         video: "kwG2ipFRgfo",
                         primary: "Biceps",
-                        secondary: "Forearms",
+                        secondary: "Underarmar",
                         technique: [
-                            "Stand with feet shoulder-width apart",
-                            "Grip barbell with underhand grip",
-                            "Keep elbows close to sides",
-                            "Curl bar up to shoulder level, squeeze biceps"
+                            "Stå med fötterna axelbrett isär",
+                            "Grepp skivstången med underhandsgrepp",
+                            "Håll armbågarna nära sidorna",
+                            "Curl stången upp till axelhöjd, knip biceps"
                         ],
                         mistakes: [
-                            "Swinging body for momentum",
-                            "Moving elbows forward",
-                            "Not fully extending at bottom"
+                            "Svänga kroppen för momentum",
+                            "Flytta armbågarna framåt",
+                            "Inte sträcka ut fullt i botten"
                         ]
                     },
                     {
                         name: "Dumbbell Curls",
                         video: "ykJmrZ5v0Oo",
                         primary: "Biceps",
-                        secondary: "Forearms",
+                        secondary: "Underarmar",
                         technique: [
-                            "Stand or sit with dumbbells at sides",
-                            "Curl one or both dumbbells up",
-                            "Supinate wrist (turn palm up) as you curl",
-                            "Lower with control"
+                            "Stå eller sitt med hantlar vid sidorna",
+                            "Curl en eller båda hantlarna upp",
+                            "Supinera handleden (vänd handflatan uppåt) när du curlar",
+                            "Sänk med kontroll"
                         ],
                         mistakes: [
-                            "Using too much weight",
-                            "Fast and uncontrolled reps",
-                            "Swinging the weights"
+                            "Använda för mycket vikt",
+                            "Snabba och okontrollerade reps",
+                            "Svänga vikterna"
                         ]
                     },
                     {
                         name: "Hammer Curls",
                         video: "zC3nLlEvin4",
                         primary: "Brachialis",
-                        secondary: "Biceps, Forearms",
+                        secondary: "Biceps, Underarmar",
                         technique: [
-                            "Hold dumbbells with neutral grip (palms facing each other)",
-                            "Keep elbows pinned to sides",
-                            "Curl up while maintaining neutral grip",
-                            "Lower slowly with control"
+                            "Håll hantlar med neutralt grepp (handflatorna mot varandra)",
+                            "Håll armbågarna fixerade vid sidorna",
+                            "Curl upp medan du behåller neutralt grepp",
+                            "Sänk långsamt med kontroll"
                         ],
                         mistakes: [
-                            "Rotating wrists during movement",
-                            "Swinging weights up",
-                            "Not controlling the negative"
+                            "Rotera handlederna under rörelsen",
+                            "Svänga vikterna upp",
+                            "Inte kontrollera den negativa fasen"
                         ]
                     },
                     {
                         name: "Cable Curls",
                         video: "NFzTWp2qpiE",
                         primary: "Biceps",
-                        secondary: "Forearms",
+                        secondary: "Underarmar",
                         technique: [
-                            "Stand facing low cable pulley",
-                            "Grip bar or rope attachment",
-                            "Keep elbows at sides, curl up",
-                            "Squeeze at top, lower with control"
+                            "Stå vänd mot låg kabeltrissor",
+                            "Grepp stång eller rep",
+                            "Håll armbågarna vid sidorna, curl upp",
+                            "Knip i toppen, sänk med kontroll"
                         ],
                         mistakes: [
-                            "Standing too close to machine",
-                            "Letting elbows drift forward",
-                            "Using body momentum"
+                            "Stå för nära maskinen",
+                            "Låta armbågarna glida framåt",
+                            "Använda kroppsmomentum"
                         ]
                     }
                 ]
@@ -449,34 +857,34 @@
                         name: "Close Grip Bench Press",
                         video: "nEF0bv2FW94",
                         primary: "Triceps",
-                        secondary: "Chest, Shoulders",
+                        secondary: "Bröst, Axlar",
                         technique: [
-                            "Lie on bench, grip bar shoulder-width or narrower",
-                            "Keep elbows tucked close to body",
-                            "Lower bar to lower chest",
-                            "Press up by extending elbows"
+                            "Ligg på bänk, grepp stången axelbredd eller smalare",
+                            "Håll armbågarna tätt mot kroppen",
+                            "Sänk stången till nedre bröstet",
+                            "Pressa upp genom att sträcka ut armbågarna"
                         ],
                         mistakes: [
-                            "Grip too narrow (strains wrists)",
-                            "Flaring elbows out",
-                            "Bouncing bar off chest"
+                            "För smalt grepp (belastar handled)",
+                            "Flaxa ut armbågarna",
+                            "Studsa stången från bröstet"
                         ]
                     },
                     {
                         name: "Triceps Dips",
                         video: "6kALZikXxLc",
                         primary: "Triceps",
-                        secondary: "Chest, Shoulders",
+                        secondary: "Bröst, Axlar",
                         technique: [
-                            "Grip parallel bars, arms straight",
-                            "Keep body upright for triceps focus",
-                            "Lower until elbows are at 90 degrees",
-                            "Push up until arms are fully extended"
+                            "Grepp parallella stänger, raka armar",
+                            "Håll kroppen upprätt för tricepsfokus",
+                            "Sänk tills armbågarna är i 90 grader",
+                            "Pressa upp tills armarna är helt utsträckta"
                         ],
                         mistakes: [
-                            "Going too deep (shoulder strain)",
-                            "Leaning too far forward",
-                            "Not locking out at top"
+                            "Gå för djupt (axelbelastning)",
+                            "Luta för långt framåt",
+                            "Inte låsa ut i toppen"
                         ]
                     },
                     {
@@ -485,15 +893,15 @@
                         primary: "Triceps",
                         secondary: "",
                         technique: [
-                            "Stand facing cable machine",
-                            "Grip bar or rope at chest height",
-                            "Keep elbows pinned to sides",
-                            "Push down until arms are straight, squeeze"
+                            "Stå vänd mot kabelmaskin",
+                            "Grepp stång eller rep vid brösthöjd",
+                            "Håll armbågarna fixerade vid sidorna",
+                            "Tryck ner tills armarna är raka, knip"
                         ],
                         mistakes: [
-                            "Letting elbows drift forward",
-                            "Using shoulders to push",
-                            "Leaning over the weight"
+                            "Låta armbågarna glida framåt",
+                            "Använda axlarna för att trycka",
+                            "Luta över vikten"
                         ]
                     },
                     {
@@ -502,110 +910,110 @@
                         primary: "Triceps",
                         secondary: "",
                         technique: [
-                            "Lie on bench holding bar above chest",
-                            "Keep upper arms vertical",
-                            "Bend elbows to lower bar to forehead",
-                            "Extend elbows to return to start"
+                            "Ligg på bänk med stången över bröstet",
+                            "Håll överarmarna vertikala",
+                            "Böj armbågarna för att sänka stången till pannan",
+                            "Sträck ut armbågarna för att återgå till start"
                         ],
                         mistakes: [
-                            "Moving elbows back and forth",
-                            "Going too heavy too soon",
-                            "Lowering bar to wrong position"
+                            "Flytta armbågarna fram och tillbaka",
+                            "Gå för tungt för snabbt",
+                            "Sänka stången till fel position"
                         ]
                     }
                 ]
             },
-            "Forearms": {
+            "Underarmar": {
                 icon: "✊",
                 exercises: [
                     {
                         name: "Barbell Wrist Curls",
                         video: "7AC4VP9C_Mw",
-                        primary: "Forearm Flexors",
+                        primary: "Underarmens Flexorer",
                         secondary: "",
                         technique: [
-                            "Sit with forearms resting on thighs",
-                            "Hold barbell with underhand grip",
-                            "Let wrists extend down",
-                            "Curl wrists up, squeezing forearms"
+                            "Sitt med underarmarna vilande på låren",
+                            "Håll skivstång med underhandsgrepp",
+                            "Låt handleder sträckas nedåt",
+                            "Curl handleder uppåt, knip underarmar"
                         ],
                         mistakes: [
-                            "Lifting forearms off thighs",
-                            "Using too much weight",
-                            "Jerky movements"
+                            "Lyfta underarmar från låren",
+                            "Använda för mycket vikt",
+                            "Ryckiga rörelser"
                         ]
                     },
                     {
                         name: "Reverse Wrist Curls",
                         video: "A9-ATxNHU60",
-                        primary: "Forearm Extensors",
+                        primary: "Underarmens Extensorer",
                         secondary: "",
                         technique: [
-                            "Sit with forearms on thighs, palms down",
-                            "Let wrists hang over edge",
-                            "Curl wrists upward",
-                            "Lower with control"
+                            "Sitt med underarmar på låren, handflatorna nedåt",
+                            "Låt handleder hänga över kanten",
+                            "Curl handleder uppåt",
+                            "Sänk med kontroll"
                         ],
                         mistakes: [
-                            "Going too heavy",
-                            "Moving forearms",
-                            "Rushing the reps"
+                            "Gå för tungt",
+                            "Flytta underarmarna",
+                            "Hasta genom reps"
                         ]
                     },
                     {
                         name: "Cable Wrist Curls",
                         video: "kVk4Qu0UXIY",
-                        primary: "Forearm Flexors",
+                        primary: "Underarmens Flexorer",
                         secondary: "",
                         technique: [
-                            "Kneel facing low cable",
-                            "Rest forearms on bench",
-                            "Curl wrists toward you",
-                            "Lower slowly with control"
+                            "Knäböj vänd mot låg kabel",
+                            "Vila underarmar på bänk",
+                            "Curl handleder mot dig",
+                            "Sänk långsamt med kontroll"
                         ],
                         mistakes: [
-                            "Using momentum",
-                            "Lifting forearms",
-                            "Not full range of motion"
+                            "Använda momentum",
+                            "Lyfta underarmarna",
+                            "Inte full rörelseomfång"
                         ]
                     }
                 ]
             },
-            "Legs": {
+            "Ben": {
                 icon: "🦵",
                 exercises: [
                     {
                         name: "Barbell Back Squats",
                         video: "bEv6CCg2BC8",
-                        primary: "Quadriceps, Glutes",
+                        primary: "Quadriceps, Gluteus",
                         secondary: "Hamstrings, Core",
                         technique: [
-                            "Bar rests on upper traps",
-                            "Feet shoulder-width, toes slightly out",
-                            "Sit back and down, keeping chest up",
-                            "Go to parallel or below, drive through heels"
+                            "Stången vilar på övre trapezius",
+                            "Fötter axelbredd, tårna lätt utåt",
+                            "Sitt bakåt och nedåt, håll bröstet uppe",
+                            "Gå till parallellt eller lägre, driv genom hälarna"
                         ],
                         mistakes: [
-                            "Knees caving inward",
-                            "Rounding lower back",
-                            "Rising on toes"
+                            "Knän som faller inåt",
+                            "Runda nedre ryggen",
+                            "Resa sig på tårna"
                         ]
                     },
                     {
                         name: "Leg Press",
                         video: "IZxyjW7MPJQ",
                         primary: "Quadriceps",
-                        secondary: "Glutes, Hamstrings",
+                        secondary: "Gluteus, Hamstrings",
                         technique: [
-                            "Sit with back flat against pad",
-                            "Place feet shoulder-width on platform",
-                            "Lower weight until knees are at 90 degrees",
-                            "Push through heels to extend legs"
+                            "Sitt med ryggen platt mot dynor",
+                            "Placera fötter axelbredd på plattformen",
+                            "Sänk vikten tills knäna är i 90 grader",
+                            "Tryck genom hälarna för att sträcka benen"
                         ],
                         mistakes: [
-                            "Locking knees at top",
-                            "Lifting hips off seat",
-                            "Going too deep"
+                            "Låsa knän i toppen",
+                            "Lyfta höfterna från sätet",
+                            "Gå för djupt"
                         ]
                     },
                     {
@@ -614,15 +1022,15 @@
                         primary: "Hamstrings",
                         secondary: "",
                         technique: [
-                            "Lie face down on machine",
-                            "Pad should be above heels",
-                            "Curl legs up toward glutes",
-                            "Lower with control"
+                            "Ligg med magen ner på maskinen",
+                            "Dynan ska vara ovanför hälarna",
+                            "Curl benen upp mot gluteus",
+                            "Sänk med kontroll"
                         ],
                         mistakes: [
-                            "Lifting hips off pad",
-                            "Using momentum",
-                            "Not full range of motion"
+                            "Lyfta höfterna från dynan",
+                            "Använda momentum",
+                            "Inte full rörelseomfång"
                         ]
                     },
                     {
@@ -631,105 +1039,105 @@
                         primary: "Quadriceps",
                         secondary: "",
                         technique: [
-                            "Sit with back against pad",
-                            "Pad should be on lower shins",
-                            "Extend legs until straight",
-                            "Squeeze quads at top, lower slowly"
+                            "Sitt med ryggen mot dynan",
+                            "Dynan ska vara på nedre smalben",
+                            "Sträck ut benen tills de är raka",
+                            "Knip quadriceps i toppen, sänk långsamt"
                         ],
                         mistakes: [
-                            "Using too much weight",
-                            "Jerky movements",
-                            "Not controlling the negative"
+                            "Använda för mycket vikt",
+                            "Ryckiga rörelser",
+                            "Inte kontrollera den negativa fasen"
                         ]
                     },
                     {
                         name: "Romanian Deadlifts",
                         video: "jEy_czb3RKA",
                         primary: "Hamstrings",
-                        secondary: "Glutes, Lower Back",
+                        secondary: "Gluteus, Nedre Rygg",
                         technique: [
-                            "Hold barbell at hip level",
-                            "Push hips back while lowering bar",
-                            "Keep bar close to legs",
-                            "Feel stretch in hamstrings, then drive hips forward"
+                            "Håll skivstång vid höfthöjd",
+                            "Skjut höfterna bakåt medan du sänker stången",
+                            "Håll stången nära benen",
+                            "Känn stretch i hamstrings, driv sedan höfterna framåt"
                         ],
                         mistakes: [
-                            "Rounding the back",
-                            "Bending knees too much",
-                            "Not hinging at hips"
+                            "Runda ryggen",
+                            "Böja knäna för mycket",
+                            "Inte hinga i höfterna"
                         ]
                     },
                     {
                         name: "Calf Raises",
                         video: "-M4-G8p8fmc",
-                        primary: "Calves",
+                        primary: "Vader",
                         secondary: "",
                         technique: [
-                            "Stand on edge of step or platform",
-                            "Let heels drop below platform level",
-                            "Push up onto toes as high as possible",
-                            "Pause at top, lower slowly"
+                            "Stå på kanten av steg eller plattform",
+                            "Låt hälarna sjunka under plattformsnivån",
+                            "Tryck upp på tårna så högt som möjligt",
+                            "Pausa i toppen, sänk långsamt"
                         ],
                         mistakes: [
-                            "Bouncing at bottom",
-                            "Not full range of motion",
-                            "Going too fast"
+                            "Studsa i botten",
+                            "Inte full rörelseomfång",
+                            "Gå för snabbt"
                         ]
                     }
                 ]
             },
-            "Stomach": {
+            "Mage": {
                 icon: "🎯",
                 exercises: [
                     {
                         name: "Crunches",
                         video: "Xyd_fa5zoEU",
-                        primary: "Rectus Abdominis (Upper Abs)",
+                        primary: "Rectus Abdominis (Övre Mage)",
                         secondary: "",
                         technique: [
-                            "Lie on back with knees bent",
-                            "Hands behind head (don't pull on neck)",
-                            "Lift shoulders off ground using abs",
-                            "Lower with control, don't rest completely"
+                            "Ligg på rygg med böjda knän",
+                            "Händer bakom huvudet (dra inte i nacken)",
+                            "Lyft axlarna från golvet med mage",
+                            "Sänk med kontroll, vila inte helt"
                         ],
                         mistakes: [
-                            "Pulling on neck with hands",
-                            "Using momentum",
-                            "Coming up too high"
+                            "Dra i nacken med händerna",
+                            "Använda momentum",
+                            "Komma upp för högt"
                         ]
                     },
                     {
                         name: "Leg Raises",
                         video: "l4kQd9eWclE",
-                        primary: "Lower Abs",
-                        secondary: "Hip Flexors",
+                        primary: "Nedre Mage",
+                        secondary: "Höftflexorer",
                         technique: [
-                            "Lie flat or hang from bar",
-                            "Keep legs straight or slightly bent",
-                            "Raise legs until perpendicular to floor",
-                            "Lower slowly with control"
+                            "Ligg plant eller häng från stång",
+                            "Håll benen raka eller lätt böjda",
+                            "Lyft benen tills de är vinkelräta mot golvet",
+                            "Sänk långsamt med kontroll"
                         ],
                         mistakes: [
-                            "Swinging legs",
-                            "Arching lower back",
-                            "Using momentum"
+                            "Svänga benen",
+                            "Böja nedre ryggen",
+                            "Använda momentum"
                         ]
                     },
                     {
                         name: "Plank",
                         video: "ASdvN_XEl_c",
-                        primary: "Core (All)",
-                        secondary: "Shoulders, Back",
+                        primary: "Core (Alla)",
+                        secondary: "Axlar, Rygg",
                         technique: [
-                            "Forearms on ground, elbows under shoulders",
-                            "Body in straight line from head to heels",
-                            "Engage core, squeeze glutes",
-                            "Hold position, breathe steadily"
+                            "Underarmar på golvet, armbågar under axlar",
+                            "Kroppen i rak linje från huvud till hälar",
+                            "Aktivera core, knip gluteus",
+                            "Håll positionen, andas jämnt"
                         ],
                         mistakes: [
-                            "Hips sagging down",
-                            "Hips raised too high",
-                            "Holding breath"
+                            "Höfter som sjunker ner",
+                            "Höfter höjda för högt",
+                            "Hålla andan"
                         ]
                     },
                     {
@@ -738,15 +1146,15 @@
                         primary: "Rectus Abdominis",
                         secondary: "",
                         technique: [
-                            "Kneel facing cable machine",
-                            "Hold rope behind head",
-                            "Crunch down, bringing elbows toward thighs",
-                            "Return with control, maintain tension"
+                            "Knäböj vänd mot kabelmaskin",
+                            "Håll rep bakom huvudet",
+                            "Crunch ner, för armbågar mot låren",
+                            "Återgå med kontroll, behåll spänning"
                         ],
                         mistakes: [
-                            "Sitting back instead of crunching",
-                            "Using arms to pull",
-                            "Not controlling the weight"
+                            "Sitta bakåt istället för att cruncha",
+                            "Använda armarna för att dra",
+                            "Inte kontrollera vikten"
                         ]
                     }
                 ]
@@ -755,7 +1163,7 @@
 
         function createExerciseHTML(exercise) {
             const secondaryHTML = exercise.secondary ? 
-                `<p><span class="secondary">Secondary:</span> ${exercise.secondary}</p>` : '';
+                `<p><span class="secondary">Sekundär:</span> ${exercise.secondary}</p>` : '';
             
             const techniqueHTML = exercise.technique.map(t => 
                 `<li><span class="check-icon">✓</span> ${t}</li>`
@@ -769,22 +1177,22 @@
                 <div class="exercise-card">
                     <div class="exercise-header" onclick="toggleExercise(this)">
                         <h3>${exercise.name}</h3>
-                        <span class="exercise-toggle">Show</span>
+                        <span class="exercise-toggle">Visa</span>
                     </div>
                     <div class="exercise-content">
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/${exercise.video}" allowfullscreen></iframe>
                         </div>
                         <div class="muscle-info">
-                            <p><span class="primary">Primary:</span> ${exercise.primary}</p>
+                            <p><span class="primary">Primär:</span> ${exercise.primary}</p>
                             ${secondaryHTML}
                         </div>
                         <div class="technique-section">
-                            <h4>Technique Points:</h4>
+                            <h4>Teknikpunkter:</h4>
                             <ul>${techniqueHTML}</ul>
                         </div>
                         <div class="mistakes-section">
-                            <h4>Common Mistakes:</h4>
+                            <h4>Vanliga Misstag:</h4>
                             <ul>${mistakesHTML}</ul>
                         </div>
                     </div>
@@ -828,8 +1236,22 @@
             const toggle = element.querySelector('.exercise-toggle');
             
             content.classList.toggle('active');
-            toggle.textContent = content.classList.contains('active') ? 'Hide' : 'Show';
+            toggle.textContent = content.classList.contains('active') ? 'Dölj' : 'Visa';
         }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
         generateHTML();
     </script>
