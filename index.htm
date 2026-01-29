@@ -351,10 +351,7 @@
             font-size: 1.3rem;
             letter-spacing: 0.05em;
             transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text);
-            display: block;
+            cursor: default;
         }
 
         .muscle-tag:hover {
@@ -614,77 +611,19 @@
         <p class="section-subtitle">Välj muskelgrupp för detaljerade övningsinstruktioner</p>
         
         <div class="muscle-groups">
-            <a href="#brost" class="muscle-tag">💪 Bröst</a>
-            <a href="#rygg" class="muscle-tag">🔙 Rygg</a>
-            <a href="#biceps" class="muscle-tag">💪 Biceps</a>
-            <a href="#triceps" class="muscle-tag">💪 Triceps</a>
-            <a href="#underarmar" class="muscle-tag">✊ Underarmar</a>
-            <a href="#ben" class="muscle-tag">🦵 Ben</a>
-            <a href="#mage" class="muscle-tag">🎯 Mage</a>
+            <div class="muscle-tag">💪 Bröst</div>
+            <div class="muscle-tag">🔙 Rygg</div>
+            <div class="muscle-tag">💪 Biceps</div>
+            <div class="muscle-tag">💪 Triceps</div>
+            <div class="muscle-tag">✊ Underarmar</div>
+            <div class="muscle-tag">🦵 Ben</div>
+            <div class="muscle-tag">🎯 Mage</div>
         </div>
     </section>
 
-    <!-- Bröst Övningar -->
-    <section id="brost" style="background: var(--bg-card); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">💪 Bröst Övningar</h2>
-            <p class="section-subtitle">Övningar för att bygga en stark och väldefinierad bröstmuskulatur</p>
-            <div id="brostExercises"></div>
-        </div>
-    </section>
-
-    <!-- Rygg Övningar -->
-    <section id="rygg" style="background: var(--bg-darker); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">🔙 Rygg Övningar</h2>
-            <p class="section-subtitle">Övningar för en bred och stark rygg</p>
-            <div id="ryggExercises"></div>
-        </div>
-    </section>
-
-    <!-- Biceps Övningar -->
-    <section id="biceps" style="background: var(--bg-card); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">💪 Biceps Övningar</h2>
-            <p class="section-subtitle">Övningar för välformade och kraftfulla biceps</p>
-            <div id="bicepsExercises"></div>
-        </div>
-    </section>
-
-    <!-- Triceps Övningar -->
-    <section id="triceps" style="background: var(--bg-darker); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">💪 Triceps Övningar</h2>
-            <p class="section-subtitle">Övningar för starka och definierade triceps</p>
-            <div id="tricepsExercises"></div>
-        </div>
-    </section>
-
-    <!-- Underarmar Övningar -->
-    <section id="underarmar" style="background: var(--bg-card); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">✊ Underarmar Övningar</h2>
-            <p class="section-subtitle">Övningar för kraftfulla grepp och starka underarmar</p>
-            <div id="underarmarExercises"></div>
-        </div>
-    </section>
-
-    <!-- Ben Övningar -->
-    <section id="ben" style="background: var(--bg-darker); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">🦵 Ben Övningar</h2>
-            <p class="section-subtitle">Övningar för kraftfulla och vältränade ben</p>
-            <div id="benExercises"></div>
-        </div>
-    </section>
-
-    <!-- Mage Övningar -->
-    <section id="mage" style="background: var(--bg-card); padding: 4rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">🎯 Mage Övningar</h2>
-            <p class="section-subtitle">Övningar för en stark och stabil core</p>
-            <div id="mageExercises"></div>
-        </div>
+    <!-- Actual Exercise Database -->
+    <section style="background: var(--bg-card);">
+        <div class="container" id="exerciseData"></div>
     </section>
 
     <!-- CTA Section -->
@@ -711,7 +650,6 @@
         const exercises = {
             "Bröst": {
                 icon: "💪",
-                containerId: "brostExercises",
                 exercises: [
                     {
                         name: "Dumbbell Press",
@@ -768,7 +706,6 @@
             },
             "Rygg": {
                 icon: "🔙",
-                containerId: "ryggExercises",
                 exercises: [
                     {
                         name: "Pull Ups",
@@ -842,7 +779,6 @@
             },
             "Biceps": {
                 icon: "💪",
-                containerId: "bicepsExercises",
                 exercises: [
                     {
                         name: "Barbell Curls",
@@ -916,7 +852,6 @@
             },
             "Triceps": {
                 icon: "💪",
-                containerId: "tricepsExercises",
                 exercises: [
                     {
                         name: "Close Grip Bench Press",
@@ -990,11 +925,10 @@
             },
             "Underarmar": {
                 icon: "✊",
-                containerId: "underarmarExercises",
                 exercises: [
                     {
                         name: "Barbell Wrist Curls",
-                        video: "jPsOEeTt_Js",
+                        video: "https://youtube.com/shorts/d5YiFNoiCa0?si=tgO68XbFSb3f16kr",
                         primary: "Underarmens Flexorer",
                         secondary: "",
                         technique: [
@@ -1011,7 +945,7 @@
                     },
                     {
                         name: "Reverse Wrist Curls",
-                        video: "cRLJ86m00cU",
+                        video: "https://youtube.com/shorts/cRLJ86m00cU?si=mda2YnmlR9ADuZdU",
                         primary: "Underarmens Extensorer",
                         secondary: "",
                         technique: [
@@ -1028,7 +962,7 @@
                     },
                     {
                         name: "Cable Wrist Curls",
-                        video: "PVEDWd2FjHM",
+                        video: "https://youtube.com/shorts/PVEDWd2FjHM?si=-71S94JK3EvSbTQE",
                         primary: "Underarmens Flexorer",
                         secondary: "",
                         technique: [
@@ -1047,7 +981,6 @@
             },
             "Ben": {
                 icon: "🦵",
-                containerId: "benExercises",
                 exercises: [
                     {
                         name: "Barbell Back Squats",
@@ -1155,7 +1088,6 @@
             },
             "Mage": {
                 icon: "🎯",
-                containerId: "mageExercises",
                 exercises: [
                     {
                         name: "Crunches",
@@ -1210,7 +1142,7 @@
                     },
                     {
                         name: "Cable Crunches",
-                        video: "QR3vANGukK8",
+                        video: "AV5PmSJfl9I",
                         primary: "Rectus Abdominis",
                         secondary: "",
                         technique: [
@@ -1249,7 +1181,7 @@
                     </div>
                     <div class="exercise-content">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/${exercise.video}" allowfullscreen></iframe>
+                            <iframe src="https://youtu.be/QR3vANGukK8?si=Oq-yKONs0ieHpk0x" allowfullscreen></iframe>
                         </div>
                         <div class="muscle-info">
                             <p><span class="primary">Primär:</span> ${exercise.primary}</p>
@@ -1269,17 +1201,34 @@
         }
 
         function generateHTML() {
+            const container = document.getElementById('exerciseData');
+            let html = '';
+
             for (const [muscleName, muscleData] of Object.entries(exercises)) {
-                const container = document.getElementById(muscleData.containerId);
-                if (container) {
-                    const exercisesHTML = muscleData.exercises.map(ex => createExerciseHTML(ex)).join('');
-                    container.innerHTML = `
-                        <div class="exercises-container active">
+                const exercisesHTML = muscleData.exercises.map(ex => createExerciseHTML(ex)).join('');
+                
+                html += `
+                    <div class="muscle-group">
+                        <div class="muscle-header" onclick="toggleMuscleGroup(this)">
+                            <h2>${muscleData.icon} ${muscleName}</h2>
+                            <span class="toggle-icon">+</span>
+                        </div>
+                        <div class="exercises-container">
                             ${exercisesHTML}
                         </div>
-                    `;
-                }
+                    </div>
+                `;
             }
+
+            container.innerHTML = html;
+        }
+
+        function toggleMuscleGroup(element) {
+            const container = element.nextElementSibling;
+            const icon = element.querySelector('.toggle-icon');
+            
+            container.classList.toggle('active');
+            icon.textContent = container.classList.contains('active') ? '−' : '+';
         }
 
         function toggleExercise(element) {
